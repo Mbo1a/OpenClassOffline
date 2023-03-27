@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<!-- saved from url=(0145)https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http -->
+<html class="js  supports no-touchevents cssfilters" lang="fr" prefix="og: http://ogp.me/ns#" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+                            Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms
+                    </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="application-name" content="OpenClassrooms">
+<meta name="msapplication-TileColor" content="#7451eb">
+<meta name="msapplication-TileImage" content="/fav-icon.png?v=3">
+<meta name="theme-color" content="#7451eb">
+<meta property="og:locale" content="fr">
+<link rel="icon" sizes="144x144" href="https://openclassrooms.com/fav-icon.png?v=3">
+<link rel="apple-touch-icon" href="https://openclassrooms.com/apple-touch-icon.png?v=3">
+<link rel="apple-touch-icon" href="https://openclassrooms.com/apple-touch-icon-iphone.png?v=3">
+<link rel="apple-touch-icon" sizes="72x72" href="https://openclassrooms.com/apple-touch-icon-ipad.png?v=3">
+<link rel="apple-touch-icon" sizes="114x114" href="https://openclassrooms.com/apple-touch-icon-iphone-retina-display.png?v=3">
+<link rel="apple-touch-icon" sizes="144x144" href="https://openclassrooms.com/apple-touch-icon-ipad-retina-display.png?v=3">
+<link rel="apple-touch-icon-precomposed" href="https://openclassrooms.com/apple-touch-icon-precomposed.png?v=3">
+<link rel="shortcut icon" href="https://openclassrooms.com/favicon.ico?3c0b069">
+<style>.async-hide { opacity: 0 !important} </style>
+<script>
+          window.dataLayer = window.dataLayer || [];
+
+          var trustarc_reload_referrer = localStorage.getItem('trustarc_reload_referrer');
+          if(trustarc_reload_referrer){
+              window.dataLayer.push({event: 'added_new_referrer', 'newReferrer': decodeURI(trustarc_reload_referrer)});
+              localStorage.removeItem('trustarc_reload_referrer');
+          }
+
+          (function(a,s,y,n,c,h,i,d,e){
+            var isEnabled = [
+              /\/paths/,
+              /\/apprenticeship/,
+              /\/employer/,
+            ].reduce(function (acc, pathReg) {
+                var matchUrl = !!document.location.pathname.match(pathReg);
+                return acc || matchUrl;
+            }, false);
+
+            if (!isEnabled) {
+              return;
+            }
+
+            s.className+=' '+y;
+            h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+            (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);
+          })(window,document.documentElement,'async-hide','dataLayer',2000,{'GTM-5WM9PV':true});
+        </script>
+<link href="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/common_oc-8acb4921.css" type="text/css" rel="stylesheet" media="all">
+<link href="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/colorDecisions.css" type="text/css" rel="stylesheet" media="all">
+<link href="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/course-65a3bb0c.css" type="text/css" rel="stylesheet" media="all">
+<link href="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/video-js.css" rel="stylesheet">
+<script>
+    /*! modernizr 3.3.1 (Custom Build) | MIT *
+    * https://modernizr.com/download/?-cssfilters-touchevents-setclasses !*/
+    !function(e,n,t){function o(e,n){return typeof e===n}function r(){var e,n,t,r,s,i,a;for(var l in C)if(C.hasOwnProperty(l)){if(e=[],n=C[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(r=o(n.fn,"function")?n.fn():n.fn,s=0;s<e.length;s++)i=e[s],a=i.split("."),1===a.length?Modernizr[a[0]]=r:(!Modernizr[a[0]]||Modernizr[a[0]]instanceof Boolean||(Modernizr[a[0]]=new Boolean(Modernizr[a[0]])),Modernizr[a[0]][a[1]]=r),g.push((r?"":"no-")+a.join("-"))}}function s(e){var n=w.className,t=Modernizr._config.classPrefix||"";if(x&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),x?w.className.baseVal=n:w.className=n)}function i(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):x?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function a(){var e=n.body;return e||(e=i(x?"svg":"body"),e.fake=!0),e}function l(e,t,o,r){var s,l,u,f,p="modernizr",c=i("div"),d=a();if(parseInt(o,10))for(;o--;)u=i("div"),u.id=r?r[o]:p+(o+1),c.appendChild(u);return s=i("style"),s.type="text/css",s.id="s"+p,(d.fake?d:c).appendChild(s),d.appendChild(c),s.styleSheet?s.styleSheet.cssText=e:s.appendChild(n.createTextNode(e)),c.id=p,d.fake&&(d.style.background="",d.style.overflow="hidden",f=w.style.overflow,w.style.overflow="hidden",w.appendChild(d)),l=t(c,e),d.fake?(d.parentNode.removeChild(d),w.style.overflow=f,w.offsetHeight):c.parentNode.removeChild(c),!!l}function u(e,n){return!!~(""+e).indexOf(n)}function f(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function p(e,n){return function(){return e.apply(n,arguments)}}function c(e,n,t){var r;for(var s in e)if(e[s]in n)return t===!1?e[s]:(r=n[e[s]],o(r,"function")?p(r,t||n):r);return!1}function d(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function m(n,o){var r=n.length;if("CSS"in e&&"supports"in e.CSS){for(;r--;)if(e.CSS.supports(d(n[r]),o))return!0;return!1}if("CSSSupportsRule"in e){for(var s=[];r--;)s.push("("+d(n[r])+":"+o+")");return s=s.join(" or "),l("@supports ("+s+") { #modernizr { position: absolute; } }",function(e){return"absolute"==getComputedStyle(e,null).position})}return t}function h(e,n,r,s){function a(){p&&(delete k.style,delete k.modElem)}if(s=o(s,"undefined")?!1:s,!o(r,"undefined")){var l=m(e,r);if(!o(l,"undefined"))return l}for(var p,c,d,h,v,y=["modernizr","tspan","samp"];!k.style&&y.length;)p=!0,k.modElem=i(y.shift()),k.style=k.modElem.style;for(d=e.length,c=0;d>c;c++)if(h=e[c],v=k.style[h],u(h,"-")&&(h=f(h)),k.style[h]!==t){if(s||o(r,"undefined"))return a(),"pfx"==n?h:!0;try{k.style[h]=r}catch(g){}if(k.style[h]!=v)return a(),"pfx"==n?h:!0}return a(),!1}function v(e,n,t,r,s){var i=e.charAt(0).toUpperCase()+e.slice(1),a=(e+" "+j.join(i+" ")+i).split(" ");return o(n,"string")||o(n,"undefined")?h(a,n,r,s):(a=(e+" "+E.join(i+" ")+i).split(" "),c(a,n,t))}function y(e,n,o){return v(e,t,t,n,o)}var g=[],C=[],S={_version:"3.3.1",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){C.push({name:e,fn:n,options:t})},addAsyncTest:function(e){C.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=S,Modernizr=new Modernizr;var w=n.documentElement,x="svg"===w.nodeName.toLowerCase(),_=S._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):["",""];S._prefixes=_;var b="CSS"in e&&"supports"in e.CSS,T="supportsCSS"in e;Modernizr.addTest("supports",b||T);var z=S.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",_.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");z(o,function(e){t=9===e.offsetTop})}return t});var P="Moz O ms Webkit",j=S._config.usePrefixes?P.split(" "):[];S._cssomPrefixes=j;var E=S._config.usePrefixes?P.toLowerCase().split(" "):[];S._domPrefixes=E;var N={elem:i("modernizr")};Modernizr._q.push(function(){delete N.elem});var k={style:N.elem.style};Modernizr._q.unshift(function(){delete k.style}),S.testAllProps=v,S.testAllProps=y,Modernizr.addTest("cssfilters",function(){if(Modernizr.supports)return y("filter","blur(2px)");var e=i("a");return e.style.cssText=_.join("filter:blur(2px); "),!!e.style.length&&(n.documentMode===t||n.documentMode>9)}),r(),s(g),delete S.addTest,delete S.addAsyncTest;for(var A=0;A<Modernizr._q.length;A++)Modernizr._q[A]();e.Modernizr=Modernizr}(window,document);
+    </script>
+<script type="text/javascript">
+    var App = {
+        startTime: (new Date()).getTime(),
+        pageGenerationDate: 1679597398000
+    };
+
+    App.user = {
+                    id: 11273146,
+            age: '24',
+            createdAt: '2020\u002D10\u002D22T10\u003A07\u003A26\u002B02\u003A00',
+            gender: '',
+            premiumType: '',
+            locale: 'fr',
+            language: 'fr',
+            displayableName: 'Ferdinand\u0020Juko\u0020Randrianirimiadana',
+            email: 'ferdinandjuko\u0040gmail.com',
+            country: 'MG',
+            phoneNumber: '',
+            avatar: 'https\u003A\/\/openclassrooms.com\/bundles\/common\/images\/avatar_defaut.png',
+            isPremium: false,
+            isMentor: false,
+            roles: {
+                CAN_CREATE_AVAILABILITY: false,
+                ROLE_ASSIGN_SUPPORT_EXPERT_TO_SUPPORT_RECIPIENT: false,
+                ROLE_ADMIN: false,
+                ROLE_CAREER_SERVICE: false,
+                ROLE_STUDENT_SUCCESS_SPECIALIST: false,
+                ROLE_MENTOR_MANAGER: false,
+                ROLE_MENTOR: false,
+                ROLE_MENTOR_ADMIN: false,
+                ROLE_CHANGE_PROJECT_SESSION_DECISION: false,
+                ROLE_EDIT_PROJECT_SESSION: false,
+            }
+            };
+
+    App.preferences = {
+        debug: false,
+        assetVersion: '3c0b069',
+        contactPhone: '\u002B33\u00201\u002080\u002088\u002080\u002030',
+        adyenPublicKey: '10001\u007C889EBFD4D434B82683E21DCA26E77C3E20E0EE09A5ECE3830B0ED51F2FA721A2F7E9EC871C6AB9A1E12C4492F4717673047757E02C5256D8E265CD51E413E5EFCCFEAC41B39C662A424ADC13EE187C38C372A7FCCEC1EA5DF841989437D78B252A8EB51008E60BB55B1E55A7A80DE1A9D60D998C128A576BFAE1DDB97D514AF0A073AEDDE84CEE40D1F8F6ECE85D0FFA50C95C06DB274021C1371376C6EB16561FD65C5E2704B570A7504D617D0F3820F176A0609F6162BDF5890533289FDC3DA7DB03B50BB3BD60A613E1FF72060F22987627E8F1A29F0128A94EC4C8FF7CF6B7AB9558D8433BF86D7A388AB927641CD6C02689139CEE3AAC9ACBFFE83806CB',
+        application: {
+            form: {
+              funnelUrl: 'https\u003A\/\/www.tfaforms.com\/responses\/processor',
+              fields: {"firstname":"tfa_6","lastname":"tfa_4","email":"tfa_2","path_id":"tfa_138","source_name":"tfa_165","record_type_id":"tfa_217","utm_medium":"tfa_203","utm_source":"tfa_201","utm_term":"tfa_207","utm_campaign":"tfa_205","utm_content":"tfa_225","gclid":"tfa_209","fbclid":"tfa_211","dclid":"tfa_233","msclkid":"tfa_231","ttclid":"tfa_232","referrerId":"tfa_229","placement":"tfa_228","consent":"tfa_150","user_locale":"tfa_125","userId":"tfa_3","gender":"tfa_10","user_study_motivation":"tfa_171","diploma_level":"tfa_292","language_proficiency_fr":"tfa_40","language_proficiency_en":"tfa_42","ha_addressline_1":"tfa_16","ha_city":"tfa_18","ha_zip_code":"tfa_24","ha_state":"tfa_163","ha_country":"tfa_22","professional_status":"tfa_94","public_employment_agency_id":"tfa_159","public_employment_validation":"tfa_290","user_pe_advisor_email":"tfa_199","disabled_worker":"tfa_67","veteran":"tfa_73","athlete":"tfa_79","refugee":"tfa_85","rsa":"tfa_91","are":"tfa_175","api":"tfa_177","cui":"tfa_179","aah":"tfa_222","other_allocs":"tfa_223","user_can_work_in_countryOfStudy":"tfa_142","online_cv":"tfa_157","user_has_mobility":"tfa_193","user_mobility_departamental":"tfa_187","user_mobility_national":"tfa_189","user_mobility_regional":"tfa_191","user_mobility_cities":"tfa_195","work_location_1":"tfa_128","work_location_2":"tfa_130","work_location_3":"tfa_132","work_location_4":"tfa_134","work_location_5":"tfa_136","career_motivation":"tfa_123","has_online_courses_xp":"tfa_118","has_online_courses_xp_text":"tfa_121","found_a_company":"tfa_146","date_of_birth":"tfa_9","phone_number":"tfa_126","user_desired_start_date":"tfa_161","tfa_dbFormId":"tfa_dbFormId","tfa_dbControl":"tfa_dbControl","experiment_id":"tfa_219","full_time_available":"tfa_220","with_prerequisite":"tfa_221","student_application_id":"tfa_226","company_name":"tfa_227","opportunity_id":"tfa_230","user_has_all_requirements":"tfa_239","user_is_working_in_company":"tfa_240","last_class_attended":"tfa_241","vae_request_type":"tfa_242","vae_sworn_statement":"tfa_245","funding_option":"tfa_264","funding_option_other":"tfa_282","user_resume_url":"tfa_265","user_diploma_url":"tfa_266","language_proficiency_proof_url":"tfa_267","user_public_employment_agency_certificate_url":"tfa_268","VAE_first_request_url":"tfa_269","VAE_delivered_notification_url":"tfa_270","latest_diploma_field_of_study":"tfa_273","is_latest_diploma":"tfa_274","latest_diploma_level":"tfa_275","highest_diploma_field_of_study":"tfa_276","user_job_title":"tfa_271","user_job_start_date":"tfa_272","company_contact_name":"tfa_283","company_contact_firstName":"tfa_284","company_contact_email":"tfa_286","company_contact_phonenumber":"tfa_288","apprenticeship_company_name":"tfa_227","apprenticeship_company_contact_name":"tfa_283","apprenticeship_company_contact_firstName":"tfa_284","apprenticeship_company_contact_email":"tfa_286","apprenticeship_company_contact_phonenumber":"tfa_288"}
+            },
+        },
+        routes: {
+            COURSE_EVENT: '/components/courses/:courseId',
+            COURSE_PART_EVENT: '/components/courses/:courseId/parts/:partId',
+
+            ACCEPT_COOKIE: '\/ajax\/components\/user\u002Daccept\u002Dconsent\u002Dcookie'
+        },
+
+                    };
+
+    App.preferences.navigationPreference = {
+                                };
+
+    App.preferences.modules = {
+        'smiley': {
+            basePath: '/bundles/common/images/smiley/'
+        }
+    };
+
+    App.notifications = {};
+    App.scripts = [];
+
+    if (App.user.id) {
+        (function(){
+            var userData = { userId: App.user.id };
+
+            if (App.user.premiumType) {
+                userData.status = (App.user.premiumType === 'Premium Solo') ? 'premium solo student' : 'path student';
+            } else {
+                userData.status = 'free student';
+            }
+
+            if (App.user.isMentor) {
+                userData.status = App.user.premiumType ? (userData.status + '|mentor') : 'mentor';
+            }
+
+            if (!window.dataLayer) {
+              return;
+            }
+            window.dataLayer.push(userData);
+        })();
+    }
+</script>
+<script>    
+    App.preferences.modules['course/view/internalFolding'] = {
+        isBigCourse: true
+    };
+
+    App.data = App.data || {};
+App.data.currentCourse = {"partId":7911191,"partTitle":"Sauvegardez les donn\u00e9es gr\u00e2ce \u00e0 une API HTTP","partSlug":"sauvegardez-les-donnees-grace-a-une-api-http","courseId":7697016,"courseTitle":"Cr\u00e9ez des pages web dynamiques avec JavaScript","courseSlug":"creez-des-pages-web-dynamiques-avec-javascript","courseLanguage":"fr","isIntroduction":false,"isCertifying":true};
+App.preferences.modules['view/currentCoursePage'] = App.data.currentCourse;
+
+</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sauvegardez les données grâce à une API HTTP">
+<meta property="og:url" content="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http">
+<meta property="og:site_name" content="OpenClassrooms">
+<meta property="og:image" content="https://course.oc-static.com/courses/7697016/7697016_teaser_picture_1674739980.jpg">
+<meta property="og:description" content="Manipulez le DOM, rendez votre page web dynamique, utilisez une API HTTP pour interagir avec un service web, et utilisez des librairies pour enrichir votre page web.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@OCFrance">
+<meta name="twitter:title" content="Sauvegardez les données grâce à une API HTTP">
+<meta name="twitter:image" content="https://course.oc-static.com/courses/7697016/7697016_teaser_picture_1674739980.jpg">
+<meta name="twitter:description" content="Manipulez le DOM, rendez votre page web dynamique, utilisez une API HTTP pour interagir avec un service web, et utilisez des librairies pour enrichir votre page web.">
+<script type="text/javascript" src="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/ruxitagentjs_ICA2NQVfgjoqru_10261230220152234.js.téléchargement" data-dtconfig="rid=RID_-1850746128|rpid=-199454283|domain=openclassrooms.com|reportUrl=/rb_bf19357ggg|app=77334b861c3931b4|featureHash=ICA2NQVfgjoqru|msl=153600|srsr=1000|vcv=2|rdnt=1|uxrgce=1|bp=3|cuc=1qt15sfj|srms=2,2,1,|mel=100000|dpvc=1|ssv=4|lastModification=1679592596590|dtVersion=10261230220152234|tp=500,50,0,1|agentUri=/ruxitagentjs_ICA2NQVfgjoqru_10261230220152234.js"></script><link rel="canonical" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http">
+</head>
+<body class="course oc-body is-connected  breadcrumbFluid" cz-shortcut-listen="true">
+<ul class="skipLink">
+<li>
+<a class="skipLink__item" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#mainContent">Aller au contenu</a>
+</li>
+<li>
+<a class="skipLink__item" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#footerChangeLanguage">Choisir la langue</a>
+</li>
+<li id="skipLink_search">
+<a class="skipLink__item" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#algolia-search-input">Aller à la recherche</a>
+</li>
+</ul>
+<script id="_EVENTS-IDENTIFY" type="application/json">
+            {
+            "type": "identify",
+            "userId": "11273146",
+            "properties": {
+                "age":  "24",
+                "name": "Ferdinand Juko Randrianirimiadana",
+                "createdAt": "2020-10-22T10:07:26+02:00",
+                "email": "ferdinandjuko@gmail.com",
+                "gender": null,
+                "premium": false,
+                "premiumType": "",
+                "locale": "fr",
+                "language": "fr"
+            },
+            "integrations": {
+                "HubSpot": false,
+                "Zendesk": false
+            }
+        }
+        </script>
+<script id="_EVENTS-PAGE" type="application/json">
+        {"type":"page","integrations":{"HubSpot":false},"properties":{"pageCategory":"courses","courseTitle":"Cr\u00e9ez des pages web dynamiques avec JavaScript"}}
+    </script>
+<script id="headerConfiguration" type="application/json">
+{
+    "user": {
+        "id": 11273146,
+        "displayableName": "Ferdinand\u0020Juko\u0020Randrianirimiadana",
+        "messageCount": 0,
+        "notificationCount": 0,
+        "profilePicture": "https://openclassrooms.com/bundles/common/images/avatar_defaut.png",
+        "premiumStatus": "none",
+        "organizationName": "",
+        "link": {
+            "profile": "/fr/members/x8tz861tzcq5",
+            "parameter": "/fr/members/x8tz861tzcq5/parametres",
+            "logOut": "/logout?_csrf_token=61b96eb2db7ed9b5330e638270a815f.nl2dyKsOkPDj9r8EEeR8vhax9wtKOWCACP1FyzemS7A.-x7Ql8de4MnSktdPKYgx_H7gs1EnXyzXbqssoVPhD_LnNtX_6HikntSi8g",
+            "analyticsDashboard": ""
+        }
+    },
+    "right": {
+        "canSeeMentorDashboard": false,
+        "canSeeAdminDashboard": false,
+        "canDisplayForumAlert": false,
+        "canEditCourse": false,
+        "canSeeOrganizationDashboard": false,
+        "canSeeTutorDashboard": false
+      }
+}
+</script>
+<script id="fundingMechanisms" type="application/json">
+    {
+        "fundingMechanisms": []
+    }
+</script>
+<div id="oc-header">
+<div class="oc-mainHeader oc-mainHeader--none oc-mainHeader--skeleton">
+<div class="grid-wrapper">
+<div class="grid-inner">
+<div style="display: flex;">
+<div class="oc-mainHeaderLogo oc-mainHeaderLogo--skeleton">
+<a href="https://openclassrooms.com/fr/" class="oc-mainHeaderLogo__link">
+<svg fill="none" height="51" width="668" viewBox="0 0 668 51" xmlns="http://www.w3.org/2000/svg">
+<title>OpenClassrooms.com</title>
+<path d="M406.011 35.018c0 2.82-.71 5.641-2.368 7.991-1.659 2.35-3.79 4.23-6.87 5.64-3.079 1.41-6.869 2.116-11.37 2.116-3.79 0-7.343-.47-10.897-1.41-3.553-.94-6.395-2.35-8.527-3.996l7.106-8.46c1.421.705 2.843 1.175 4.501 1.88 2.842.94 5.448 1.41 8.054 1.41 4.974 0 7.58-1.41 7.58-3.995 0-1.41-.711-2.35-2.132-3.056-1.421-.705-3.79-1.41-6.87-2.115-3.553-.705-6.395-1.645-8.764-2.585s-4.264-2.35-6.159-4.23c-1.658-1.88-2.606-4.701-2.606-7.991 0-3.056.711-5.641 2.369-7.991 1.658-2.35 3.79-4.23 6.87-5.64 3.079-1.41 6.869-2.116 11.37-2.116 3.079 0 6.159.47 9.001 1.175 3.08.705 5.685 1.88 7.817 3.055l-7.343 8.696c-3.316-1.41-6.633-2.115-9.712-2.115-2.606 0-4.501.47-5.685 1.175-1.185.705-1.895 1.88-1.895 3.056 0 1.41.711 2.35 2.132 2.82 1.421.705 3.79 1.41 6.869 2.115a49.4 49.4 0 0 1 8.765 2.585c2.369.94 4.264 2.35 6.159 4.23 1.658 1.646 2.605 4.466 2.605 7.756zm261.989 0c0 2.82-.711 5.641-2.369 7.991s-3.79 4.23-6.869 5.64c-3.08 1.41-6.87 2.116-11.371 2.116-3.79 0-7.343-.47-10.896-1.41s-6.396-2.35-8.528-3.996l7.107-8.46c1.421.705 2.842 1.175 4.501 1.88 2.842.94 5.448 1.41 8.053 1.41 4.975 0 7.581-1.41 7.581-3.995 0-1.41-.711-2.35-2.132-3.056-1.422-.705-3.791-1.41-6.87-2.115a49.361 49.361 0 0 1-8.764-2.585c-2.369-.94-4.264-2.35-6.159-4.23-1.658-1.88-2.606-4.701-2.606-7.991 0-3.056.711-5.641 2.369-7.991 1.658-2.35 3.79-4.23 6.869-5.64 3.08-1.41 6.87-2.116 11.371-2.116 3.079 0 6.158.47 9.001 1.175 3.079.705 5.685 1.88 7.817 3.055l-7.343 8.696c-3.317-1.41-6.633-2.115-9.712-2.115-2.606 0-4.501.47-5.685 1.175-1.185.705-1.896 1.88-1.896 3.056 0 1.41.711 2.35 2.132 2.82 1.422.705 3.791 1.41 6.87 2.115a49.361 49.361 0 0 1 8.764 2.585c2.369.94 4.264 2.35 6.159 4.23 1.895 1.646 2.606 4.466 2.606 7.756zM87.882 19.037c0 3.76-.947 6.816-2.605 9.4-1.659 2.586-4.027 4.701-7.107 6.111s-6.87 2.116-10.896 2.116H59.22v12.69H45.955V.706h21.319c4.264 0 7.817.705 10.896 2.115 3.08 1.41 5.448 3.526 7.107 6.346 1.895 3.055 2.605 6.346 2.605 9.87zm-13.265 0c0-2.35-.71-3.995-2.132-5.17s-3.316-1.88-6.159-1.88h-7.343v14.336h7.343c2.606 0 4.738-.706 6.16-1.88s2.131-3.056 2.131-5.406zm55.904 20.212v10.576h-37.19V1.175h36.242v10.576h-23.214v8.226h18.476v10.341h-18.476v8.93zm50.218-38.074v48.65h-10.896l-20.609-25.853v25.853h-13.028V1.175h10.896l20.609 25.853V1.175zm84.092 37.604v10.81h-32.926V.94h13.265v37.604h19.661zm56.851 11.046h-13.739l-3.553-9.401h-19.661l-3.553 9.4h-13.502l20.608-48.649h13.029zM300.6 30.083l-5.922-15.512-5.922 15.512zm62.536 4.935c0 2.82-.71 5.641-2.369 7.991-1.658 2.35-3.79 4.23-6.869 5.64-3.08 1.41-6.87 2.116-11.37 2.116-3.79 0-7.344-.47-10.897-1.41s-6.396-2.35-8.527-3.996l7.106-8.46c1.421.705 2.842 1.175 4.501 1.88 2.842.94 5.448 1.41 8.054 1.41 4.974 0 7.58-1.41 7.58-3.995 0-1.41-.711-2.35-2.132-3.056-1.421-.705-3.79-1.41-6.87-2.115-3.553-.705-6.395-1.645-8.764-2.585s-4.264-2.35-6.159-4.23c-1.658-1.88-2.606-4.701-2.606-7.991 0-3.056.711-5.641 2.369-7.991 1.658-2.35 3.79-4.23 6.87-5.64 3.079-1.41 6.869-2.116 11.37-2.116 3.079 0 6.159.47 9.001 1.175 3.08.705 5.448 1.88 7.817 3.055l-7.343 8.696c-3.316-1.41-6.633-2.115-9.712-2.115-2.606 0-4.501.47-5.685 1.175-1.185.705-1.895 1.88-1.895 3.056 0 1.41.71 2.35 2.132 2.82 1.421.705 3.79 1.41 6.869 2.115a49.4 49.4 0 0 1 8.765 2.585c2.368.94 4.263 2.35 6.158 4.23 1.659 1.646 2.606 4.466 2.606 7.756zm-322.63-9.636c0 13.867-11.37 25.383-25.583 25.383-5.685 0-10.66-1.88-14.923-4.936l8.528-10.105c1.895 1.175 4.027 1.88 6.395 1.88 6.633 0 12.081-5.406 12.081-11.986 0-6.581-5.448-11.987-12.08-11.987-2.37 0-4.501.705-6.396 1.88L0 5.407C4.264 2.35 9.475.47 14.923.47 29.136.235 40.506 11.516 40.506 25.383zm177.66 10.341l8.528 10.107c-4.264 3.055-9.476 4.935-14.924 4.935-13.976 0-25.583-11.281-25.583-25.383C186.187 11.517 197.557 0 211.77 0c5.685 0 10.66 1.88 14.924 4.936l-8.528 10.105c-1.895-1.175-4.027-1.88-6.396-1.88-6.632 0-12.081 5.406-12.081 11.986 0 6.581 5.449 11.987 12.081 11.987 2.369.47 4.501-.235 6.396-1.41zm236.169 14.102l-10.423-15.042c3.079-1.41 5.211-3.525 6.87-6.11 1.658-2.585 2.605-5.876 2.605-9.401 0-3.76-.947-6.816-2.605-9.636-1.659-2.82-4.027-4.7-7.107-6.346-3.079-1.41-6.869-2.115-10.896-2.115H411.46v48.65h13.028V37.134h6.159l8.764 12.69zm-29.847-37.839h7.58c2.606 0 4.738.705 6.159 1.88s2.132 3.056 2.132 5.17c0 2.351-.711 3.996-2.132 5.171s-3.316 1.88-6.159 1.88h-7.58zM483.945.235c13.976 0 25.583 11.281 25.583 25.382S498.157 51 483.945 51c-13.976 0-25.583-11.281-25.583-25.383S469.732.235 483.945.235zm-13.029 25.147c0 7.051 5.685 12.692 12.792 12.692 7.106 0 12.791-5.64 12.791-12.692s-5.685-12.69-12.791-12.69c-6.87 0-12.792 5.64-12.792 12.69zM538.901.235c13.976 0 25.583 11.281 25.583 25.382S553.114 51 538.901 51c-13.976 0-25.583-11.281-25.583-25.383S524.925.235 538.901.235zm-12.792 25.147c0 7.051 5.685 12.692 12.792 12.692 7.106 0 12.791-5.64 12.791-12.692s-5.685-12.69-12.791-12.69c-7.107 0-12.792 5.64-12.792 12.69zm70.353 6.816L580.828 1.175h-10.896v48.65h11.607V28.438l11.607 21.387h6.87l11.607-21.387v21.387h11.607V1.175h-10.897z"></path>
+</svg>
+</a>
+</div>
+<nav class="oc-mainHeader__navWrapper" role="navigation" aria-label="Menu principal">
+<div class="oc-mainHeader__linksWrapper">
+<div class="oc-mainHeader__navLinkWrapper"><a class="oc-mainHeader__navLink" data-event="click|Header|Trainings" href="https://openclassrooms.com/fr/paths">Formations</a></div>
+<div class="oc-mainHeader__navLinkWrapper--separator"></div>
+<div class="oc-mainHeader__navLinkWrapper"><a class="oc-mainHeader__navLink" data-event="click|Header|Business" href="https://openclassrooms.com/fr/business">Pour les entreprises</a></div>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="disclaimers-container" style="display:none;">
+<!--[if lt IE 10]>
+        <div class="alertMessage">
+        <span class="bullet bullet--small bullet--orange alertMessage__icon"> <i class="icon-exclamation"></i></span>
+        <p class="alertMessage__text">
+            Vous utilisez un navigateur obsolète, veuillez le <a href="https://browser-update.org/update.html">mettre à jour</a>.
+        </p>
+    </div>
+    <![endif]-->
+
+<div id="modern-ie-disclaimer" style="display:none">
+<div class="alertMessage">
+<span class="bullet bullet--small bullet--orange alertMessage__icon"> <i class="icon-exclamation"></i></span>
+<p class="alertMessage__text">
+Vous utilisez un navigateur obsolète, veuillez le <a href="https://browser-update.org/update.html">mettre à jour</a>.
+</p>
+</div>
+</div>
+<script id="webapp-ie-disclaimer" type="application/json">{"message":"Vous utilisez un navigateur obsol\u00e8te, veuillez le <a href=\"https:\/\/browser-update.org\/update.html\">mettre \u00e0 jour<\/a>."}</script>
+<script>
+      var isModernIE =  document.documentMode === 10 || document.documentMode === 11;
+      var isEdgeLegacy = navigator.userAgent.indexOf('Edge') > -1; // Luckily for us, Edge Chromium uses string "Edg" without final "e"
+
+      if (isModernIE || isEdgeLegacy) {
+        document.getElementById('modern-ie-disclaimer').style.display = 'block';
+        document.getElementById('webapp-ie-disclaimer').setAttribute('data-role', 'disclaimer-message-data');
+      }
+    </script>
+<noscript>
+        <div class="alertMessage">
+            <span class="bullet bullet--small bullet--orange alertMessage__icon"> <i class="icon-exclamation"></i></span>
+            <p class="alertMessage__text">
+                Veuillez utiliser un <a href="https://browser-update.org/update.html">navigateur internet moderne</a> avec JavaScript activé pour naviguer sur OpenClassrooms.com
+            </p>
+        </div>
+    </noscript>
+</div>
+<div id="mainContentWithHeader">
+<section class="breadcrumb  inset no-padding">
+<div class="grid-wrapper">
+<div class="grid-inner">
+<nav class="breadcrumb__wrapper" role="navigation" aria-label="Fil d&#39;Ariane">
+<ul class="breadcrumb__trail">
+<li class="breadcrumb__item" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+<a class="breadcrumb__link" href="https://openclassrooms.com/fr/" itemprop="url">
+<span itemprop="title">Accueil</span></a>
+<span class="breadcrumb__separator"> &gt; </span>
+</li>
+<li class="breadcrumb__item" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+<a class="breadcrumb__link" href="https://openclassrooms.com/fr/courses" itemprop="url">
+<span itemprop="title">Cours</span></a>
+<span class="breadcrumb__separator"> &gt; </span>
+</li>
+<li class="breadcrumb__item" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+<a class="breadcrumb__link" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript" itemprop="url">
+<span itemprop="title">Créez des pages web dynamiques avec JavaScript</span></a>
+<span class="breadcrumb__separator"> &gt; </span>
+</li>
+<li class="breadcrumb__item" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+Sauvegardez les données grâce à une API HTTP
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+<div id="pre-main-part">
+</div>
+<main class="claire clearfix" role="main" id="mainContent">
+<article itemscope="" itemtype="http://schema.org/Article" lang="fr">
+<header id="course-header" class="courseHeader" xmlns="http://www.w3.org/1999/html">
+<div class="grid-wrapper"><div class="grid-inner"><div class="grid-inner-content"><div class="courseHeader__topPart"><a itemprop="url" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript"><h1 class="oc-typography-h2 courseHeader__title" data-course-title="Créez des pages web dynamiques avec JavaScript">Créez des pages web dynamiques avec JavaScript</h1></a></div></div></div></div><div class="grid-wrapper"><div class="grid-inner"><div class="grid-inner-content"><div class="courseHeader__bottomPart"><div class="courseHeader__details"><div class="courseHeader__detailsGroup"><ul class="courseHeader__detailsList"><li class="courseHeader__detailsItem"><img class="courseHeader__icon js-tooltip" src="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/schedule.svg" width="16" title="Ce cours demande en moyenne 12 heures de travail pour être réussi."><span class="courseHeader__label">12 heures</span></li><li class="courseHeader__detailsItem"><i class="icon-level courseHeader__icon"></i><span class="courseHeader__label">Moyenne</span></li></ul></div><div class="courseHeader__detailsGroup courseHeader--license"><a class="courseHeader__license" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0"><span class="courseHeader__label">Licence</span><ul class="courseHeader__detailsList"><li class="iconBar__item"><i class="icon-cc iconBar__icon" title="CC"></i></li><li class="iconBar__item"><i class="icon-ccby iconBar__icon" title="BY"></i></li><li class="iconBar__item"><i class="icon-ccsa iconBar__icon" title="SA"></i></li></ul></a></div></div></div></div></div></div>
+<div id="popin-formats-availables" class="popin popin--course-formats-availables">
+<i class="popin__close-button icon-close js-close-button"></i>
+<div class="course-types course-types--withSpace">
+<a class="course-types__item" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript">
+<i class="icon-desktop course-types__icon"></i>
+</a>
+<a class="course-types__item" href="https://openclassrooms.com/fr/courses?video=true">
+<i class="icon-video course-types__icon"></i>
+</a>
+<a class="course-types__item" href="https://openclassrooms.com/fr/courses/7697016/certificate_example" target="_blank">
+<i class="icon-badge course-types__icon js-close-button"></i>
+</a>
+</div>
+<p>Ce cours est visible <a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript">gratuitement en ligne</a>.</p>
+<p>course.header.alt.is_video</p>
+<p>
+course.header.alt.is_certifying
+</p>
+<a class="button button--primary js-close-button" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#">J'ai tout compris !</a>
+</div>
+</header>
+<div class="grid-wrapper">
+<div class="grid-inner">
+<div class="grid-inner-content">
+<p class="courseHeader__updatedTime">
+Mis à jour le 06/03/2023 </p>
+</div>
+</div>
+</div>
+<div class="grid-wrapper">
+<div class="grid-inner">
+<div class="grid-inner-content">
+<nav id="course-timeline" class="timeline">
+<div class="timeline__inner">
+<span class="timeline__iconContainer">
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript" title="Retour sur le sommaire du cours" class="roundIcon timeline__roundIcon">
+<i class="icon-home roundIcon__icon"></i>
+</a>
+</span>
+<div class="timeline__steps">
+<span class="timeline__splitChapter"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7910972-tirez-un-maximum-de-ce-cours" class="timeline__step timeline__step--completed" title="Tirez un maximum de ce cours">
+<span class="timeline__stepName">
+Tirez un maximum de ce cours
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7910981-preparez-votre-projet" class="timeline__step timeline__step--completed" title="Préparez votre projet">
+<span class="timeline__stepName">
+Préparez votre projet
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911021-exploitez-des-donnees-au-format-json" class="timeline__step timeline__step--completed" title="Exploitez des données au format JSON">
+<span class="timeline__stepName">
+Exploitez des données au format JSON
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911057-generez-le-contenu-de-votre-page-grace-au-dom" class="timeline__step timeline__step--completed" title="Générez le contenu de votre page grâce au DOM">
+<span class="timeline__stepName">
+Générez le contenu de votre page grâce au DOM
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/exercises/4629" class="timeline__step" title="Quiz : Créer une page web à partir de données existantes">
+<span class="timeline__stepName">
+Quiz : Créer une page web à partir de données existantes
+</span>
+</a>
+<span class="timeline__splitChapter"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911102-manipulez-les-listes-en-javascript" class="timeline__step timeline__step--completed" title="Manipulez les listes en JavaScript">
+<span class="timeline__stepName">
+Manipulez les listes en JavaScript
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911123-projetez-des-donnees-avec-la-fonction-map" class="timeline__step timeline__step--completed" title="Projetez des données avec la fonction map">
+<span class="timeline__stepName">
+Projetez des données avec la fonction map
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911138-mettez-a-jour-l-affichage-de-la-page-web" class="timeline__step timeline__step--completed" title="Mettez à jour l’affichage de la page web">
+<span class="timeline__stepName">
+Mettez à jour l’affichage de la page web
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/exercises/4630" class="timeline__step" title="Quiz : Rendre une page web interactive">
+<span class="timeline__stepName">
+Quiz : Rendre une page web interactive
+</span>
+</a>
+<span class="timeline__splitChapter"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911151-envoyez-une-requete-depuis-le-navigateur" class="timeline__step" title="Envoyez une requête depuis le navigateur">
+<span class="timeline__stepName">
+Envoyez une requête depuis le navigateur
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911177-traitez-la-reponse-du-serveur" class="timeline__step" title="Traitez la réponse du serveur">
+<span class="timeline__stepName">
+Traitez la réponse du serveur
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http" class="timeline__step js-current-timeline-step" title="Sauvegardez les données grâce à une API HTTP">
+<span class="timeline__stepName">
+Sauvegardez les données grâce à une API HTTP
+</span>
+<span class="timeline__progressMarker"></span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911201-sauvegardez-les-donnees-dans-le-localstorage" class="timeline__step" title="Sauvegardez les données dans le localStorage">
+<span class="timeline__stepName">
+Sauvegardez les données dans le localStorage
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/exercises/4631" class="timeline__step" title="Quiz : Interagir avec un site web en utilisant une API HTTP">
+<span class="timeline__stepName">
+Quiz : Interagir avec un site web en utilisant une API HTTP
+</span>
+</a>
+<span class="timeline__splitChapter"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911217-choisissez-une-librairie-adaptee-aux-besoins-de-votre-projet" class="timeline__step" title="Choisissez une librairie adaptée aux besoins de votre projet">
+<span class="timeline__stepName">
+Choisissez une librairie adaptée aux besoins de votre projet
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911248-installez-la-librairie-grace-au-gestionnaire-de-paquets-npm" class="timeline__step" title="Installez la librairie grâce au gestionnaire de paquets NPM">
+<span class="timeline__stepName">
+Installez la librairie grâce au gestionnaire de paquets NPM
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911250-utilisez-la-librairie-pour-enrichir-votre-projet" class="timeline__step" title="Utilisez la librairie pour enrichir votre projet">
+<span class="timeline__stepName">
+ Utilisez la librairie pour enrichir votre projet
+</span>
+</a>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/exercises/4632" class="timeline__step" title="Quiz : Enrichir une page web grâce aux librairies">
+<span class="timeline__stepName">
+Quiz : Enrichir une page web grâce aux librairies
+</span>
+</a>
+<span class="timeline__splitChapter"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911268-verifiez-que-votre-code-respecte-les-conventions-de-codage" class="timeline__step" title="Vérifiez que votre code respecte les conventions de codage">
+<span class="timeline__stepName">
+Vérifiez que votre code respecte les conventions de codage
+</span>
+</a>
+<span class="timeline__splitChapter"></span>
+</div>
+<span class="timeline__iconContainer">
+<a href="https://openclassrooms.com/fr/courses/7697016/certificate_example" title="Certificat de réussite (voir un exemple)" class="roundIcon timeline__roundIcon">
+<i class="icon-trophy roundIcon__icon"></i>
+</a>
+</span>
+</div>
+</nav>
+</div>
+</div>
+</div>
+<div class="grid-wrapper">
+<div class="grid-inner">
+<div class="contentWithSidebar  spacer  js-contentWithSidebar  grid-inner-content">
+<div class="contentWithSidebar__content">
+<div id="js-courseRedirection" data-courseinfo-course_id="7697016"></div>
+<div class="relative js-sidebar-container">
+<div class="static">
+<h2 itemprop="name" data-part-title="Sauvegardez les données grâce à une API HTTP" class="part-title">Sauvegardez les données grâce à une API HTTP</h2>
+<section class="space-bottom js-desktop-sticky-container">
+<div itemprop="articleBody" data-page-indentifier="/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http" class="js-isRestrictablePage js-course-container js-smilize js-userCanWatchVideo">
+<div class="userContent js-userContent">
+<p id="r-7913202" data-claire-element-id="33238481"></p><video id="r-8124522" data-claire-element-id="33564302" src="https://vimeo.com/739024482"><a href="https://vimeo.com/739024482">https://vimeo.com/739024482</a></video><p id="r-7974042" data-claire-element-id="33238483">L’API HTTP et la fonction fetch nous ont permis de récupérer dynamiquement les avis de nos pièces automobiles. Nous souhaitons maintenant permettre aux utilisateurs de déposer leurs avis sur le site. Pour y parvenir, nous allons devoir sauvegarder ces avis grâce à l’API HTTP et au verbe POST.</p><h3 id="r-7911190" data-claire-element-id="33114501">Personnalisez votre requête avec le deuxième argument de fetch</h3><p id="r-7909851" data-claire-element-id="33110791">La sauvegarde de nouvelles données dans l’API HTTP nécessite de renseigner trois nouvelles informations en plus du chemin de la ressource : le verbe HTTP, la charge utile et les en-têtes.</p><p id="r-7909853" data-claire-element-id="33110793">Pour y parvenir, il faut utiliser le deuxième argument de la fonction fetch.</p><pre id="r-7911911" data-claire-element-id="33114441"><code data-claire-semantic="javascript">fetch("chemin de la ressource", { /* Objet de configuration */ });</code></pre><aside id="r-7911916" data-claire-element-id="33114451" data-claire-semantic="information"><p id="r-7909859" data-claire-element-id="33110799">Ce deuxième argument accepte un objet. Nous devons renseigner trois propriétés dans cet objet pour configurer les trois nouvelles informations.</p></aside><p id="r-7909861" data-claire-element-id="33110801">La première propriété concerne le protocole HTTP. Ce dernier utilise les <strong>verbes </strong>(GET, POST…) pour désigner l’opération demandée par la requête. Pour créer des avis, nous utiliserons le verbe POST, et nous le renseignerons grâce à la propriété <strong>method</strong> de l’objet de configuration. Sa valeur sera une chaîne de caractères contenant le verbe HTTP.</p><pre id="r-7911917" data-claire-element-id="33114452"><code data-claire-semantic="javascript">{
+    /* Objet de configuration */
+    method: "POST"
+}</code></pre><p id="r-7911918" data-claire-element-id="33114453">La deuxième propriété concerne la <strong>charge utile</strong> de la requête, c’est-à-dire l’ensemble de données que le serveur utilisera pour réaliser l’opération demandée par la requête. La charge utile est renseignée avec la propriété <strong>body</strong> de l’objet de configuration. Sa valeur sera une chaîne de caractères. Pour envoyer les informations d’un nouvel avis, nous utiliserons le format JSON.</p><pre id="r-7911921" data-claire-element-id="33114461"><code data-claire-semantic="javascript">{
+    /* Objet de configuration */
+    body: '{"commentaire":"Top produit !"}'
+}</code></pre><p id="r-7911922" data-claire-element-id="33114462">La troisième propriété concerne le format de la charge utile avec les en-têtes. Dans la majeure partie des cas, elle doit être spécifiée pour que le serveur l'interprète correctement. L’en-tête que nous utiliserons pour faire cela est “Content-Type”. La propriété <strong>headers</strong> aura comme valeur un objet contenant lui-même une propriété "Content-Type" et une valeur indiquant le <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_Types">type MIME</a> du format de la charge utile.</p><pre id="r-7911926" data-claire-element-id="33114471"><code data-claire-semantic="javascript">{
+    /* Objet de configuration */
+    headers: { "Content-Type": "application/json" }
+}</code></pre><blockquote id="r-7911931" data-claire-element-id="33114491"><p id="r-7909888" data-claire-element-id="33110828">Ainsi, l’appel à la fonction fetch ci-dessous permettra de configurer une requête pour qu’elle soit envoyée avec le verbe POST et un objet au format JSON comme charge utile&nbsp;:</p></blockquote><pre id="r-7911932" data-claire-element-id="33114492"><code data-claire-semantic="javascript">fetch("/pieces/1/avis", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: '{"commentaire": "Top produit !"}'
+});</code></pre><h3 id="r-7911197" data-claire-element-id="33564305">Envoyez vos avis à partir de la page web</h3><p id="r-8063127" data-claire-element-id="33463052">Maintenant que vous en savez plus sur le deuxième argument de fetch, passez à présent sur <a href="https://github.com/OpenClassrooms-Student-Center/7697016-Front-End.1/tree/P3C3-Debut">l'étiquette P3C3-Debut</a>, sur le dépôt GitHub. J’ai ajouté un formulaire dans le fichier index.html qui vous permettra d’écrire un nouvel avis. Pour l’ajouter vous-même, insérez le code ci-dessous dans la section filtres, après l’input de type range.&nbsp;</p><pre id="r-8063128" data-claire-element-id="33462932"><code data-claire-semantic="javascript">&lt;input type="range" name="prix-max" id="prix-max" min="0" max="60" step="5"&gt;
+&lt;!-- code a ajouter --&gt;
+&lt;h3&gt;Ajouter un avis&lt;/h3&gt;
+&lt;form class="formulaire-avis"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;Identifiant de la pièce :&lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="number" name="piece-id"&gt;&lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;Nom d'utilisateur :&lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" name="utilisateur"&gt;&lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;Avis :&lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" name="commentaire"&gt;&lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;button&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;</code></pre><p id="r-7909900" data-claire-element-id="33110840">C’est parti ! Reprenons le code de notre application pour enregistrer de nouveaux avis. 😃</p><p id="r-7909902" data-claire-element-id="33110842">En premier lieu, dans le fichier avis.js, nous rajoutons un event listener sur l’événement “submit” de la balise form. Cet événement est déclenché lorsque le formulaire est validé.</p><aside id="r-7911936" data-claire-element-id="33114511" data-claire-semantic="information"><p id="r-7909904" data-claire-element-id="33110844">Il existe deux façons de valider un formulaire :</p><ul id="r-7909909" data-claire-element-id="33110849"><li id="r-7909906" data-claire-element-id="33110846"><p id="r-7909905" data-claire-element-id="33110845">lorsque l’utilisateur appuie sur Entrée alors qu’il a son curseur dans un champ input&nbsp;;</p></li><li id="r-7909908" data-claire-element-id="33110848"><p id="r-7909907" data-claire-element-id="33110847">lorsqu’il clique sur le bouton “Envoyer”.</p></li></ul></aside><pre id="r-7911937" data-claire-element-id="33442132"><code data-claire-semantic="javascript">export function ajoutListenerEnvoyerAvis() {
+   const formulaireAvis = document.querySelector(".formulaire-avis");
+   formulaireAvis.addEventListener("submit", function (event) {
+   /* ... */
+   });
+}
+</code></pre><p id="r-8063152" data-claire-element-id="33442162">N’oubliez pas d’importer la fonction dans le fichier pieces.js en ajoutant la fonction dans la ligne d’import. Sinon, le listener ne fonctionnera pas. Vous devez donc écrire&nbsp;:</p><pre id="r-8063162" data-claire-element-id="33442182"><code data-claire-semantic="javascript">import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+// Récupération des pièces depuis le fichier JSON
+const reponse = await fetch('http://localhost:8081/pieces/');
+const pieces = await reponse.json();
+// on appelle la fonction pour ajouter le listener au formulaire
+ajoutListenerEnvoyerAvis()</code></pre><aside id="r-8063154" data-claire-element-id="33442164" data-claire-semantic="warning"><p id="r-7911938" data-claire-element-id="33114513">Lorsqu’un formulaire est validé, le comportement normal du navigateur est de changer l’URL de l’onglet et d’initier le chargement d’une nouvelle page. Dans notre cas, nous ne souhaitons pas conserver ce comportement, car nous allons gérer nous-mêmes la communication avec le serveur grâce à la fonction fetch.</p></aside><p id="r-7909920" data-claire-element-id="33110860">Nous ajoutons donc un appel à la fonction preventDefault de l’objet event à l’intérieur de la fonction anonyme&nbsp;:</p><pre id="r-7911942" data-claire-element-id="33114522"><code data-claire-semantic="javascript">// Désactivation du comportement par défaut du navigateur
+event.preventDefault();</code></pre><p id="r-7911943" data-claire-element-id="33114523">Nous allons maintenant construire la charge utile de la requête qui permettra d’ajouter l’avis dans l’API. La charge utile prend la forme d’une chaîne de caractères au format JSON, contenant un objet. Cet objet reprend les champs du formulaire, et crée une propriété pour chacun d’entre eux.</p><p id="r-7909929" data-claire-element-id="33110869">Nous construisons donc un objet en reprenant les valeurs des balises input du formulaire&nbsp;:</p><pre id="r-7911946" data-claire-element-id="33531032"><code data-claire-semantic="javascript">// Création de l’objet du nouvel avis.
+const avis = {
+   pieceId: parseInt(event.target.querySelector("[name=piece-id]").value),
+   utilisateur: event.target.querySelector("[name=utilisateur").value,
+   commentaire: event.target.querySelector("[name=commentaire]").value,
+};
+</code></pre><aside id="r-8063178" data-claire-element-id="33442233" data-claire-semantic="warning"><p id="r-8063177" data-claire-element-id="33442232">Pensez à toujours vérifier les champs de formulaire avant d’envoyer votre requête au serveur, afin de vous assurer que les données envoyées correspondent bien aux attentes de celui-ci. Cela vous évitera bien des ennuis&nbsp;!</p></aside><p id="r-7911947" data-claire-element-id="33114532">Cet objet avis doit être converti en une chaîne de caractères au format JSON pour être transmis dans le body de la requête. Nous appelons donc la fonction JSON.stringify&nbsp;:</p><pre id="r-7911951" data-claire-element-id="33114541"><code data-claire-semantic="javascript">// Création de la charge utile au format JSON
+const chargeUtile = JSON.stringify(avis);</code></pre><p id="r-7911952" data-claire-element-id="33114542">Nous disposons maintenant de tous les éléments nécessaires pour créer et envoyer la requête avec la fonction fetch.</p><pre id="r-7911956" data-claire-element-id="33114551"><code data-claire-semantic="javascript">// Appel de la fonction fetch avec toutes les informations nécessaires
+fetch("http://localhost:8081/avis", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: chargeUtile
+});</code></pre><p id="r-7911957" data-claire-element-id="33114552">Si vous appuyez sur le bouton “Afficher les avis” de la pièce pour laquelle vous venez de déposer un nouvel avis, vous le verrez apparaître dans le texte sous le bouton.</p><h4 id="r-7911196" data-claire-element-id="33564304">Récapitulons en vidéo</h4><p id="r-7909959" data-claire-element-id="33110899">Vous pouvez revoir les différentes étapes de cette démonstration dans la vidéo ci-dessous :</p><video id="r-8124523" data-claire-element-id="33564303" src="https://vimeo.com/777404387"><a href="https://vimeo.com/777404387">https://vimeo.com/777404387</a></video><h3 id="r-7913277" data-claire-element-id="33564308">À vous de jouer</h3><p id="r-7909963" data-claire-element-id="33442255">Dans le fichier index.html de la branche <a href="https://github.com/OpenClassrooms-Student-Center/7697016-Front-End.1/tree/P3C3-Exercice">P3C3-Exercice</a> :</p><ul id="r-7909968" data-claire-element-id="33110908"><li id="r-7909965" data-claire-element-id="33110905"><p id="r-7909964" data-claire-element-id="33110904">Ajoutez une balise input type=”number” qui servira à spécifier le nombre d’étoiles que l’utilisateur attribue à la pièce avec son commentaire.</p></li><li id="r-7909967" data-claire-element-id="33110907"><p id="r-7909966" data-claire-element-id="33110906">Modifiez en conséquence le fichier avis.js pour prendre en compte cette nouvelle information dans la charge utile. Vous utiliserez la propriété “nbEtoiles” dans l’objet de la charge utile.</p></li></ul><h4 id="r-7911198" data-claire-element-id="33564307">Corrigé</h4><p id="r-7909969" data-claire-element-id="33442256">Vous pouvez vérifier votre travail&nbsp;en consultant la branche <a href="https://github.com/OpenClassrooms-Student-Center/7697016-Front-End.1/tree/P3C3-Solution">P3C3-Solution</a> et en regardant la vidéo ci-dessous&nbsp;:&nbsp;</p><video id="r-8124524" data-claire-element-id="33564306" src="https://vimeo.com/777404417"><a href="https://vimeo.com/777404417">https://vimeo.com/777404417</a></video><h3 id="r-7913280" data-claire-element-id="33118609">En résumé</h3><ul id="r-7909993" data-claire-element-id="33110933"><li id="r-7909974" data-claire-element-id="33110914"><p id="r-7909973" data-claire-element-id="33110913">Utilisez le deuxième argument de la fonction fetch pour personnaliser votre requête.</p></li><li id="r-7909983" data-claire-element-id="33110923"><p id="r-7909975" data-claire-element-id="33110915">Configurez l’objet du deuxième argument en renseignant trois propriétés&nbsp;:</p><ul id="r-7909982" data-claire-element-id="33110922"><li id="r-7909977" data-claire-element-id="33110917"><p id="r-7909976" data-claire-element-id="33110916">method pour le verbe HTTP ;</p></li><li id="r-7909979" data-claire-element-id="33110919"><p id="r-7909978" data-claire-element-id="33110918">body pour la charge utile ;</p></li><li id="r-7909981" data-claire-element-id="33110921"><p id="r-7909980" data-claire-element-id="33110920">headers pour les en-têtes.</p></li></ul></li><li id="r-7909992" data-claire-element-id="33110932"><p id="r-7909984" data-claire-element-id="33110924">Pour créer une nouvelle ressource avec une API HTTP qui accepte le format JSON, vous devez utiliser&nbsp;:</p><ul id="r-7909991" data-claire-element-id="33110931"><li id="r-7909986" data-claire-element-id="33110926"><p id="r-7909985" data-claire-element-id="33110925">le verbe POST ;</p></li><li id="r-7909988" data-claire-element-id="33110928"><p id="r-7909987" data-claire-element-id="33110927">un body au format JSON ;</p></li><li id="r-7909990" data-claire-element-id="33110930"><p id="r-7909989" data-claire-element-id="33110929">un en-tête Content-Type application/json.</p></li></ul></li></ul><p id="r-7909995" data-claire-element-id="33110935"><em>Et voilà, vous avez réussi à sauvegarder vos données en utilisant la fonction fetch. Découvrons dans le chapitre suivant comment garder notre page web active grâce au localStorage.</em></p>
+</div>
+<div class="js-courseSelementActions sideActions">
+<ul class="sideActions__container">
+<li>
+<a class="sideActions__item  js-courseElementActions-copyUrl  js-tooltip" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#" data-tooltip="Copier le lien" data-tooltip-done="Lien copié !">
+#
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="text-center space-top">
+<form name="form" method="post" action="https://openclassrooms.com/fr/courses/7697016/parts/7911191/mark-as-complete" class=" oc-form">
+<button type="submit" id="form_submit" name="form[submit]" class="button button--primary button"> J'ai terminé ce chapitre et je passe au suivant</button>
+<input type="hidden" id="form__token" name="form[_token]" class=" textInput textInput--hidden" value="1c321ca76d3ac61.rr0tXtUxLP6Qh4IdPIzbUJDXv0LV_ejmzrRH87p6FOs.99tXFo12YZaptsdNff-PMeO9inCKhJqhr4J-wdAeUoTxy3czn1hmi6fQ6Q"></form>
+</div>
+<nav id="course-pagination" class="course-pagination    clearfix">
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911177-traitez-la-reponse-du-serveur" class="button button--secondary  course-pagination__btn course-pagination__btn--previous">
+<i class="icon-previous"></i>
+<span>Traitez la réponse du serveur</span>
+</a>
+<span class="course-pagination__separator"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911201-sauvegardez-les-donnees-dans-le-localstorage" class="button button--secondary  course-pagination__btn course-pagination__btn--next">
+<span>Sauvegardez les données dans le localStorage</span>
+<i class="icon-next"></i>
+</a>
+</nav>
+<div tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="popin-view-restriction_popin_title" class="popin popin--illustrated  js-popin" id="popin-view-restriction">
+<button class="popin__close-button  js-close-button" title="Fermer" aria-label="Fermer">
+<i class="icon-close" aria-hidden="true"></i>
+</button>
+<div class="popin__inner">
+<div class="popin__illustrationWrapper">
+<div class="popin__illustration illustration--balloon"></div>
+</div>
+<div class="popin__mainContainer">
+<div class="popin__gigTitleContainer js-popin-title">
+<div class="gigWorkersPopin__timeline">
+<div class="gigWorkersPopin__dot">1</div>
+<div class="gigWorkersPopin__line"></div>
+<div class="gigWorkersPopin__dot gigWorkersPopin__dot--disabled">2</div>
+</div>
+<div class="popin__title">Créez un compte <br> OpenClassrooms</div>
+</div>
+<div id="popin-view-restriction_popin_title" class="popin__title  js-popin-title">Waouh&nbsp;!</div>
+<div class="popin__content  js-popin-content">
+<div class="popin__contentWrapper">
+<p>
+Très heureux de voir que nos cours vous plaisent, déjà 5 pages lues aujourd'hui ! Vous pouvez continuer la lecture de nos cours en devenant un membre de la communauté d'OpenClassrooms. C'est gratuit !
+</p>
+<p>
+Vous pourrez aussi suivre votre avancement dans le cours, faire les exercices et discuter avec les autres membres.
+</p>
+</div>
+</div>
+<div class="popin__actions  js-popin-actions">
+<span class="u--inlineBlock">
+<a class="button button--primary " href="https://openclassrooms.com/fr/login?context=courseAccess">S'inscrire</a>
+</span>
+<span class="u--inlineBlock">
+<a class="button button--secondary " href="https://openclassrooms.com/fr/login?context=courseAccess">Se connecter</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script type="text/template" class="js-single-video-download-info">
+            <div class="videoDownload js-download-video-popin-link">
+                <a href="#popin-download-video" class="js-popin-activator">
+                    <i class="icon-download videoDownload__icon"></i> Télécharger la vidéo
+                </a>
+            </div>
+        </script>
+<script type="text/template" class="js-all-video-download-info">
+            <div class="videoDownload js-download-video-popin-link">
+                <a href="#popin-download-all-videos" class="js-popin-activator">
+                    <i class="icon-download videoDownload__icon"></i> Télécharger toutes les vidéos de ce cours
+                </a>
+            </div>
+        </script>
+<div id="popin-not-certifying-yet_805402" class="popin" data-popin-title="Vous ne pouvez pas encore obtenir de certificat de réussite à l&#39;issue de ce cours.
+                            &lt;span&gt;&lt;i class=&#39;icon-star&#39;&gt;&lt;/i&gt; Devenez Premium&lt;/span&gt;
+                    ">
+<img alt="Exemple de certificat de réussite" src="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/certif.jpg">
+</div>
+<div tabindex="-1" role="dialog" aria-hidden="true" class="popin popin--small  js-popin" id="popin-download-video">
+<button class="popin__close-button  js-close-button" title="Fermer" aria-label="Fermer">
+<i class="icon-close" aria-hidden="true"></i>
+</button>
+<div class="popin__inner">
+<div class="popin__mainContainer">
+<div class="popin__gigTitleContainer js-popin-title">
+<div class="gigWorkersPopin__timeline">
+<div class="gigWorkersPopin__dot">1</div>
+<div class="gigWorkersPopin__line"></div>
+<div class="gigWorkersPopin__dot gigWorkersPopin__dot--disabled">2</div>
+</div>
+<div id="popin-download-video_popin_title" class="popin__title">Créez un compte <br> OpenClassrooms</div>
+</div>
+<i class="icon-video popin__icon  js-popin-icon"></i>
+<div class="popin__content  js-popin-content">
+<div class="popin__contentWrapper">
+<p>
+Le téléchargement des vidéos de nos cours est accessible pour les membres Premium. Vous pouvez toutefois les visionner en streaming gratuitement.
+</p>
+</div>
+</div>
+<div class="popin__actions  js-popin-actions">
+<a class="button button--primary js-close-button" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#">Devenez Premium</a>
+</div>
+</div>
+</div>
+</div>
+<div id="popin-not-certifying-yet_402605" class="popin" data-popin-title="Vous ne pouvez pas encore obtenir de certificat de réussite à l&#39;issue de ce cours.
+                            &lt;span&gt;&lt;i class=&#39;icon-star&#39;&gt;&lt;/i&gt; Devenez Premium&lt;/span&gt;
+                    ">
+<img alt="Exemple de certificat de réussite" src="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/certif.jpg">
+</div>
+<div tabindex="-1" role="dialog" aria-hidden="true" class="popin popin--small  js-popin" id="popin-download-video">
+<button class="popin__close-button  js-close-button" title="Fermer" aria-label="Fermer">
+<i class="icon-close" aria-hidden="true"></i>
+</button>
+<div class="popin__inner">
+<div class="popin__mainContainer">
+<div class="popin__gigTitleContainer js-popin-title">
+<div class="gigWorkersPopin__timeline">
+<div class="gigWorkersPopin__dot">1</div>
+<div class="gigWorkersPopin__line"></div>
+<div class="gigWorkersPopin__dot gigWorkersPopin__dot--disabled">2</div>
+</div>
+<div id="popin-download-video_popin_title" class="popin__title">Créez un compte <br> OpenClassrooms</div>
+</div>
+<i class="icon-video popin__icon  js-popin-icon"></i>
+<div class="popin__content  js-popin-content">
+<div class="popin__contentWrapper">
+<p>
+Le téléchargement des vidéos de nos cours est accessible pour les membres Premium. Vous pouvez toutefois les visionner en streaming gratuitement.
+</p>
+</div>
+</div>
+<div class="popin__actions  js-popin-actions">
+<a class="button button--primary js-close-button" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911191-sauvegardez-les-donnees-grace-a-une-api-http#">Devenez Premium</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside id="content-with-sidebar" class="contentWithSidebar__sidebar  js-contentWithSidebar-slidingElement">
+<nav class="col-nav">
+<div id="tab-courseMenu" class="col-nav__inner js-sidebar-inner">
+<div class="col-nav__block  col-nav__block--summary">
+<div class="side-paginate">
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911177-traitez-la-reponse-du-serveur" class="side-paginate__previous" title="Chapitre précédent">
+<i class="icon-previous"></i>
+</a>
+
+<span class="side-paginate__separator"></span>
+<h6 class="side-paginate__title">
+Interagissez avec un service web en utilisant une API HTTP
+</h6>
+<span class="side-paginate__separator"></span>
+<a href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911201-sauvegardez-les-donnees-dans-le-localstorage" class="side-paginate__next" title="Chapitre suivant">
+<i class="icon-next"></i>
+</a>
+</div>
+<div class="col-nav__block--summary-list">
+<ol class="col-nav__chapters">
+<li class="">
+<a class="col-nav__chapterTitle" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911151-envoyez-une-requete-depuis-le-navigateur">Envoyez une requête depuis le navigateur</a>
+</li>
+<li class="">
+<a class="col-nav__chapterTitle" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911177-traitez-la-reponse-du-serveur">Traitez la réponse du serveur</a>
+</li>
+<li class="selected">
+<span class="col-nav__chapterTitle">Sauvegardez les données grâce à une API HTTP</span>
+</li>
+<li class="">
+<a class="col-nav__chapterTitle" href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911201-sauvegardez-les-donnees-dans-le-localstorage">Sauvegardez les données dans le localStorage</a>
+</li>
+</ol>
+<div class="tocExercise"><ul class="tocExercise__list"><li class="tocExercise__item "><a class="tocExercise__link " href="https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/exercises/4631"><i class="tocExercise__icon icon-test"></i><span class="tocExercise__text">Quiz : Interagir avec un site web en utilisant une API HTTP</span></a></li></ul></div> </div>
+</div>
+<div class="socialNetwork col-nav__block">
+<ul class="socialButtons  js-socialButtons" data-options="
+                title: &#39;Sauvegardez les données grâce à une API HTTP @OCFrance&#39;,
+        mailTitle: &#39;Cours &quot;Sauvegardez les données grâce à une API HTTP&quot; sur OpenClassrooms&#39;,
+        mailContent: &#39;Découvrez le cours &quot;Sauvegardez les données grâce à une API HTTP&quot; sur OpenClassrooms.&#39;">
+<li>
+<a class="roundIcon  roundIcon--twitter addthis_button_twitter  js-socialButtons-btn" data-tooltip="Partagez sur Twitter">
+<i class="roundIcon__icon  icon-twitter"></i>
+</a>
+</li>
+<li>
+<a class="roundIcon  roundIcon--facebook  addthis_button_facebook  js-socialButtons-btn" data-tooltip="Partagez sur Facebook">
+<i class="roundIcon__icon  icon-facebook"></i>
+</a>
+</li>
+<li>
+<a class="roundIcon  addthis_button_email  js-socialButtons-btn  js-socialButtons-email" data-tooltip="Partagez par e-mail">
+<i class="roundIcon__icon  icon-letter"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+</aside>
+</div>
+</div>
+</div>
+<footer id="course-footer" class="alt-section noMarginBottom">
+<div class="grid-wrapper">
+<div class="grid-inner">
+<div class="grid-inner-content  courseFooter">
+<div class="courseFooter__authorsOnly course-bottom__category">
+<div class="course-bottom__title">
+Les professeurs
+</div>
+<div>
+<div class="course-bottom__text-illustrated">
+<span data-author="Aurélien Antonio" data-image-cdn-background-image="https://www.gravatar.com/avatar/7e3eae94cfd32de86d63c98702babb3d/?s=256&amp;r=g&amp;d=https%3A%2F%2Fopenclassrooms.com%2Fbundles%2Fcommon%2Fimages%2Favatar_defaut.png" data-image-cdn-width="120"></span>
+<div class="course-bottom__subtitle" itemprop="name">Aurélien Antonio</div>
+<p itemprop="description">
+Développeur Web et Mobile Freelance 100% remote, Mentor passionné. J'aime à découvrir d'autres cultures. Expatrié en Amérique latine.
+</p>
+</div>
+<div class="course-bottom__text-illustrated">
+<span data-author="Pierre-Eric Garcia" data-image-cdn-background-image="https://www.gravatar.com/avatar/eb73865d0953134179ff279efb0f0c02/?s=256&amp;r=g&amp;d=https%3A%2F%2Fopenclassrooms.com%2Fbundles%2Fcommon%2Fimages%2Favatar_defaut.png" data-image-cdn-width="120"></span>
+<div class="course-bottom__subtitle" itemprop="name">Pierre-Eric Garcia</div>
+<p itemprop="description">
+Senior Front-End Engineer, passionné de React et de JavaScript ❤️
+</p>
+</div>
+<div class="course-bottom__text-illustrated">
+<span data-author="Thomas Kerbrat" data-image-cdn-background-image="https://user.oc-static.com/users/avatars/16572319082714_kerbrat_thomas_profile_oc.png" data-image-cdn-width="120"></span>
+<div class="course-bottom__subtitle" itemprop="name">Thomas Kerbrat</div>
+<p itemprop="description">
+Entrepreneur, enseignant et développeur en informatique. Expert en ingénierie logicielle, diplômé de l'école INTECHINFO.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</article>
+</main>
+</div>
+<div id="mainSearchLegacy" class="mainSearch"></div>
+<div id="footerWrapper">
+<footer id="footer" class="oc-footerSkeleton">
+<hr style="margin-bottom: 8px">
+<div class="grid-wrapper">
+<div class="grid-inner">
+<div class="oc-footerSkeleton__container">
+<div class="oc-footerSkeleton__item">
+<div class="oc-footerSkeleton__itemTitle"><span class="skeleton" style="height: 20px; width: 80%"></span></div>
+<ul class="oc-footerSkeleton__linksList">
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 70%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 60%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 65%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 40%"></span></a></p>
+</li>
+</ul>
+</div>
+<div class="oc-footerSkeleton__item">
+<div class="oc-footerSkeleton__itemTitle"><span class="skeleton" style="height: 20px; width: 85%"></span></div>
+<ul class="oc-footerSkeleton__linksList">
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 40%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 60%"></span></a></p>
+</li>
+</ul>
+</div>
+<div class="oc-footerSkeleton__item">
+<div class="oc-footerSkeleton__itemTitle"><span class="skeleton" style="height: 20px; width: 75%"></span></div>
+<ul class="oc-footerSkeleton__linksList">
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 65%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 40%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 50%"></span></a></p>
+</li>
+<li class="oc-footerSkeleton__linksListItem">
+<p><a tabindex="inherit"><span class="skeleton" style="height: 14px; width: 40%"></span></a></p>
+</li>
+</ul>
+</div>
+<div class="oc-footerSkeleton__item">
+<span class="skeleton" style="height: 25px; width: 65%"></span>
+<div class="oc-footerSkeleton__socialButtonWrapper">
+<div><span class="skeleton skeleton--round" style="width: 40px; height: 40px"></span></div>
+<div><span class="skeleton skeleton--round" style="width: 40px; height: 40px;"></span></div>
+<div><span class="skeleton skeleton--round" style="width: 40px; height: 40px;"></span></div>
+<div><span class="skeleton skeleton--round" style="width: 40px; height: 40px;"></span></div>
+<div><span class="skeleton skeleton--round" style="width: 40px; height: 40px;"></span></div>
+</div>
+<div><span class="skeleton skeleton--width50" style="height: 40px;"></span></div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div id="showDisclaimer" class="cookiesDisclaimer"></div>
+<script>
+  var isPrerender = !!navigator.userAgent.match(/github\.com\/prerender\/prerender/);
+  var preRenderBrowserFakeUa = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163 Safari/537.36";
+  var polyfillFeatures = [
+    'default',
+    'es6',
+    'IntersectionObserver',
+    'Object.values',
+    'Array.prototype.includes',
+    'Array.prototype.findIndex',
+    'Array.prototype.find',
+    'Array.from',
+    'Promise.prototype.finally',
+    'fetch',
+    'String.prototype.includes',
+    'Object.entries',
+    'Array.prototype.entries',
+    'Array.prototype.flat',
+    'Intl.~locale.fr'
+  ];
+  var polyfillUrl = "https://cdn.polyfill.io/v3/polyfill.min.js?unknown=polyfill&features=" + polyfillFeatures.join(',');
+
+    if (isPrerender) {
+    polyfillUrl+= "&ua=" + encodeURIComponent(preRenderBrowserFakeUa);
+  }
+
+  App.translations = {};
+
+  App.scripts.push(polyfillUrl);
+
+  App.script = {
+      DASHBOARD: 'dashboard',
+      MENTORSHIP_STUDENT_DASHBOARD: 'mentorshipStudentdashboard',
+      SHOP: 'shop',
+      PAYMENT: 'payment',
+      PROJECTS: 'projects',
+      TEAM: 'team',
+      COURSE_EDIT: 'course_edit',
+      COURSE_VIEW: 'course_view',
+      ADMIN: 'admin',
+      ADMIN_STUDENT_CREDENTIAL: 'adminStudentCredential',
+      ADMIN_STUDENT_CREDENTIAL_EDIT: 'adminStudentCredentialEdit',
+      POST_A_JOB: 'postAJob',
+      GIG_WORKERS: 'gigWorkers',
+      JOB_SURVEY: 'jobSurvey',
+      MCQ_EDIT: 'mcqEdit',
+      MCQ_VIEW: 'mcqView',
+      MENTOR_EDIT: 'mentorEdit',
+    PATHS: 'paths',
+    PRIVATE_CONVERSATIONS: 'privateConversations',
+    USER_PROFILE: 'userProfile',
+    WELCOME: 'welcome',
+    APPRENTICESHIP: 'apprenticeship',
+    WEBAPP: 'webapp',
+    PROJECTS_ADMIN: 'projectsAdmin',
+    SECURITY: 'security',
+  };
+
+  App.scripts.push("/js/index.40d1d1d5c7f5d1d80b9c.js");
+</script>
+<script type="text/javascript">
+        function getConsentedSegmentIntegrations() {
+            // getCookie from https://www.w3schools.com/js/js_cookies.asp
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) === 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            var consent = getCookie('cmapi_cookie_privacy');
+
+            function isCookieAllowedByConsent(consent, level) {
+              return !!consent && consent.search(level) !== -1;
+            }
+
+            var isFunctionalCookieAllowed = isCookieAllowedByConsent(consent, 2);
+            var isAdvertisingCookieAllowed = isCookieAllowedByConsent(consent, 3);
+
+            var isAppCuesPremiumUser = false;
+
+            var isOnPoleEmploiPage = !!window && window.location.pathname.indexOf('partners/pole-emploi/offers') >= 0;
+
+            return {
+                Amplitude: isFunctionalCookieAllowed,
+                'Bing Ads': isAdvertisingCookieAllowed,
+                'Google Ads': isAdvertisingCookieAllowed,
+                'Google Analytics': isFunctionalCookieAllowed,
+                'Zendesk': isFunctionalCookieAllowed,
+                Appcues: (isAppCuesPremiumUser || isOnPoleEmploiPage) && isFunctionalCookieAllowed,
+            };
+        }
+
+        var consentedSegmentIntegrations = getConsentedSegmentIntegrations();
+
+        !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.2";
+            window.loadAnalytics = function () { window.analytics.load('v1q5MEqEX06PGmFJJeTpNNf57U3tQw5Z', {integrations: consentedSegmentIntegrations}) };
+        }}();
+    </script>
+
+<script>App.scriptToLoad = App.script.COURSE_VIEW</script>
+
+<script>
+    (function () {
+        function loadScripts(cb) {
+            App.scripts.forEach(function (src, index) {
+                var script = document.createElement('script');
+                script.src = src;
+                script.async = false;
+                document.body.appendChild(script);
+
+                if (cb && index === App.scripts.length - 1) {
+                    script.onload = cb;
+                }
+            });
+        }
+
+        function boot() {
+            loadScripts(function () {
+                if (App.modules) {
+                    App.modules.startAll();
+                }
+            });
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener('load', boot, false);
+        } else if (window.attachEvent) {
+            window.attachEvent('onload', boot);
+        } else {
+            window.onload = boot;
+        }
+    }());
+</script>
+<script defer="" src="./12-Sauvegardez les données grâce à une API HTTP - Créez des pages web dynamiques avec JavaScript - OpenClassrooms_files/vb26e4fa9e5134444860be286fd8771851679335129114" integrity="sha512-M3hN/6cva/SjwrOtyXeUa5IuCT0sedyfT+jK/OV+s+D0RnzrTfwjwJHhd+wYfMm9HJSrZ1IKksOdddLuN6KOzw==" data-cf-beacon="{&quot;rayId&quot;:&quot;7ac8db79e8589cfb&quot;,&quot;token&quot;:&quot;8e698008242e427fae12788d79d12ecf&quot;,&quot;version&quot;:&quot;2023.3.0&quot;,&quot;si&quot;:100}" crossorigin="anonymous"></script>
+
+
+</body></html>
