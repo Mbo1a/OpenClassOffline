@@ -3,6 +3,8 @@ body {
     margin: auto;
 }
 
+
+
 p {
     text-align: center;
 }
@@ -16,9 +18,12 @@ main {
     align-content:center;
 }
 section {
-    border: 1px solid #000;
+    border: 1px solid #f2f2f2;
     height: 70vh;
     width: 80%;
+    background-color: #f2f2f2;
+    box-shadow: 6px 6px 0px #bda6a6;
+    border-radius: 10px;
 }
 
 section:nth-child(1) {
@@ -26,10 +31,8 @@ section:nth-child(1) {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    background-color: #F6F6F6;
     justify-content: center;
     margin-top: 70px;
-    border: 1px solid #000;
     height: 50vh;
     align-content: center;
 }
@@ -73,27 +76,26 @@ img {
 }
 
 section:nth-child(3) {
-    margin-bottom: 20px;
-    /* background-color: #F2AB11; */
+    margin-bottom: 50px;
+    height: 80vh;
 }
 
 section:nth-child(3) p {
-    margin-bottom: 30px;
-    /* border: 1px solid #000; */
     width: 60%;
     text-align: justify;
-    background-color: #f2f2f2;
 }
 b {
     color: black;
+    text-align: center;
 }
 label {
     margin-bottom: 10px;
 }
 textarea {
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 .micro {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -101,13 +103,13 @@ textarea {
     justify-content: center;
     align-content: center;
     gap: 15px;
+    margin-bottom: 20px
 
 }
 
-.micro p {
+.micro p, .micro img {
     color: #1BB09B;
-    /* text-align: justify; */
-    /* width: 50%; */
+    /* border: 1px solid #000; */
 }
 
 .formulaire {
@@ -116,15 +118,23 @@ textarea {
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
-    /* border: 1px solid #000; */
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 .form-group {
     width: 40%;
+    /* border: 1px solid #000; */
 }
 
 input[type="submit"] {
-    background-color: #000;
+    border: 1px solid #1BB09B;
+    border-radius: 2px;
+    background-color: #1BB09B;
     color: #fff;
+    height: 35px;
+    width: 100%;
+    font-size: 18px;
+    font-family: inherit;
 }
 textarea {
     font-size: 18px;
@@ -134,13 +144,13 @@ textarea {
     border-radius: 100px;
 }
 
-input, label {
+.input {
     height: 35px;
     width: 100%;
     font-size: 18px;
     font-family: inherit;
     margin-bottom: 20px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 
