@@ -1,0 +1,96 @@
+section:nth-child(1) {
+    background-image: url("../image/element-3.png");
+    border: 1px solid #000;
+    height: 100vh;
+    background-size: cover;
+}
+
+section:nth-child(1) div {
+    margin-top: 300px;
+    width: 40%;
+    margin-left: 30px;
+}
+
+.primary button {
+    background-color: #FFC619;
+    border: 1px solid #FFC619;
+    margin-left: 10px;
+    height: 20px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+input{
+    height: 20px;
+}
+p{
+    color: #DFDEE6;
+}
+section:nth-child(2){
+    background-image: url("../image/element-2.png");
+    height: 100vh;
+    border: 1px solid #000;
+    background-size: cover;
+}
+section:nth-child(2) .aina{
+    width: 50%;
+    margin-left: 50px;
+    
+
+}
+section:nth-child(2) .aina p{
+    color: chartreuse;
+} 
+.santatra {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    /* border: 1px solid #000; */
+    align-content: flex-end;
+    height: 65.7vh;
+    
+    justify-content: center;
+}
+.santatra div{
+    height: 269px;
+    width: 24.79%;
+}
+.m1 {
+    background-color: #EC1C2A;
+    
+
+}
+.select p, .select h3{
+    margin-left: 10px;
+}
+.m2 {
+    background-color: #EAC306;
+    border: 1px solid #EAC306;
+}
+.m3 {
+    background-color: #2D2937;
+    border: 1px solid #2D2937;
+}
+.m4 {
+    background-color: #585A69;
+    border: 1px solid #585A69;
+}
+
+h2.a {
+    font-size: 2rem;
+    margin-left: 10px;
+}
+.select button {
+    padding: 12px 15px;
+    justify-content: center;
+    border-radius: 21px;
+}
+.select .com {
+    background-color: #F5EAE8;
+}
+.select .btn {
+    background-color: #0C0401;
+    color: #DFDEE6;
+}
