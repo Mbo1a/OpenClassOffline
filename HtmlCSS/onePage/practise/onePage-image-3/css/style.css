@@ -1,0 +1,88 @@
+body {
+    margin: auto;
+    font-family: 'Arial', sans-serif;
+}
+
+section:nth-child(1) {
+    background-image: url(../image/Ford_Mustang.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    color: lightblue;
+}
+
+nav ul a:hover {
+    border-bottom: 2px solid cyan;
+}
+
+nav ul a, nav ul b {
+    padding: 10px 15px 0px 15px;
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+nav ul button {
+    text-align: center;
+    width: 204px;
+    height: 29px;
+    border: 1px solid #959C66;
+    background-color: #959C66;
+    border-radius: 10px;
+}
+nav ul button:hover {
+    cursor:pointer;
+    border: 1px solid #EFAB22;
+    background-color: #EFAB22;
+    /* padding: 12px 17px 2px 17px; */
+    font-size: 13px;
+    width: 206px;
+    height: 31px;
+}
+
+.primary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60%;
+    margin: 100px 0px 0px 320px;
+}
+.primary div:nth-child(1) {
+    width: 44%;
+}
+.primary div:nth-child(2) {
+    width: 55%;
+    height: 22vh;
+    margin-top: 38px;
+}
+
+.text-orange {
+    color: orange;
+}
+
+.text-blue {
+    color: blue;
+}
+
+.primary div:nth-child(1) p b {
+    color:rgb(14, 16, 107);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold';
+    font-size: 5rem;
+}
+.primary div:nth-child(1) p i {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold';
+    font-size: 5rem;
+}
+
+
+
+
