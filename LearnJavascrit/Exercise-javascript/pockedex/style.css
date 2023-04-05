@@ -1,0 +1,107 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial,Helvetica, sans-serif;
+    background: #333;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    padding: 2px 0;
+    color: #f1f1f1;
+}
+
+.recherche-poke {
+    max-width: 700px;
+    width: 70px;
+    min-width: 450px;
+    margin: 30px auto;
+    position: relative;
+    display: flex;
+}
+
+.recherche-poke input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+.recherche-poke label {
+    position: absolute;
+    color: #333;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 8px;
+    transition: all 0.3s ease-in;
+}
+
+.recherche-poke button {
+    margin-left: 5px;
+    padding: 15px;
+    border: #cccccc 2px solid;
+    border-radius: 5px;
+    background: transparent;
+    color: #cccccc;
+}
+
+.recherche-poke button:hover {
+    cursor: pointer;
+    background: #ccc;
+    color: #333;
+    transition: .8s;
+    animation: bounce .3s;
+}
+
+@keyframes bounce {
+    50%{transform: scale(1.07);}
+    100%{transform: scale(1);}
+}
+
+.recherche-poke:focus-within label,
+.recherche-poke.active-input label {
+    top: -15px;
+    padding-left: 5px;
+    color: #f1f1f1;
+}
+
+.container {
+    width: 70px;
+    max-width: 1100px;
+    height: auto;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.liste-poke li {
+    width: 250px;
+    height: auto;
+    padding: 15px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.liste-poke h5 {
+    font-size: 19px;
+}
+
+.liste-poke p {
+    font-size: 18px;
+}
