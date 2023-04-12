@@ -6,7 +6,7 @@ let jourActuel = adj.toLocaleDateString('fr-FR', options)
 
 jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1)
 
-let tabJourEnOrdre = joursSemaine.slice(jourSemaine.indexOf(jourActuel))
+let tabJourEnOrdre = joursSemaine.slice(joursSemaine.indexOf(jourActuel))
     .concat(joursSemaine.slice(0, joursSemaine.indexOf(jourActuel)))
 
 const CLEFAPI = 'df10b74539bc5f30a6bacf07255'
