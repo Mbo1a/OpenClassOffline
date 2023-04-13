@@ -1,0 +1,128 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, #121c3b, #2f2f2f);
+    color: #e2e2e2;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4vw;
+    margin: 30px 0;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 20px;
+    font-size: 20px;
+    width: 75%;
+    background: transparent;
+    color: #e2e2e2;
+    border: solid #e2e2e2;
+    border-radius: 5px;
+}
+
+input:focus {
+    box-shadow: Opx 0px 2px 2px rgba(255, 255, 255, 4);
+}
+
+button {
+    display: block;
+    width: 300px;
+    font-size: 25px;
+    padding: 25px;
+    margin: 5px; background: transparent;
+    border: solid #e2e2e2;
+    border-radius: 5px;
+    color: #e2e2e2;
+}
+
+button:nth-child(1) {
+    animation: idle 2.5s alternate infinite;
+}
+
+button:hover {
+    color: #121c3b;
+    cursor: pointer;
+    background: #e2e2e2;
+    transition: .3s;
+    animation: bounce .3s;
+}
+
+@keyframes bounce {
+    0%{}
+    50%{
+        transform: scale(1.03);
+    }
+    100%{
+        transform: scale(1.01);
+    }
+}
+
+@keyframes idle {
+    0%{
+        transform: matrix(1, 0, 0, 1, 0, 0);
+    }
+    93%{
+        transform: matrix(1, 0, 0, 1, 0, 0);
+    }
+    95%{
+        transform: matrix(1.03, -0.03, 0.03, 1.03, 0, 0);
+    }
+    97%{
+        transform: matrix(1.03, 0.03, -0.03, 1.03, 0, 0);
+    }
+}
+
+.affichage {
+    list-style-type: none;
+    margin: 0 auto;
+    width: 75%;
+    padding: 15px;
+    font-size: 40px;
+}
+
+.info-text {
+    margin: 10px auto;
+    padding: 20px;
+    font-size: 20px;
+    width: 75px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

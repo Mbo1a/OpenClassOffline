@@ -7,11 +7,11 @@ let jourActuel = adj.toLocaleDateString('fr-FR', options)
 jourActuel = jourActuel.charAt(0).toUpperCase() + jourActuel.slice(1)
 
 let tabJourEnOrdre = joursSemaine.slice(joursSemaine.indexOf(jourActuel))
-    .concat(joursSemaine.slice(0, joursSemaine.indexOf(jourActuel)))
-
-const CLEFAPI = 'df10b74539bc5f30a6bacf07255'
-let resultAPI
-const temps = document.querySelector(".temps")
+.concat(joursSemaine.slice(0, joursSemaine.indexOf(jourActuel)))
+    
+const CLEFAPI = 'c792ee48165debf84ca7cbfba3ed0998'
+let resultatAPI;
+let temps = document.querySelector(".temps");
 const temperature = document.querySelector(".temperature")
 const localisation = document.querySelector(".localisation")
 const heure = document.querySelectorAll(".heure-nom-prevision")
@@ -34,18 +34,31 @@ if(navigator.geolocation) {
 
 
 function AppelAPI(long, lat) {
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?\
-            lat=${lat}&lon=${long}&exclude=minutely\
-            &units=metric&lang=fr&appid=${CLEFAPI}`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${CLEFAPI}`)
+    //fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely&units=metric&lang=fr&appid=${CLEFAPI}`)
+    // fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${long}&exclude=${part}&appid=${CLEFAPI}`)
     .then((response) => {
         return response.json()
     })
     .then((data) => {
         resultatAPI = data
+        const jsonObject = {
+            "clouds": { "all": 75 },
+            "dt": 1681387200,
+            "dt_txt": "2023-04-13 12:00:00"
+          };
+          
+          const dtTxtValue = jsonObject.dt_txt; // Access the value of dt_txt field and assign it to a variable
+          
+          console.log(dtTxtValue); // Output: 2023-04-13 12:00:00
+          
+        console.log(resultatAPI)
+        console.log(resultatAPI.list[0].dt_txt)
 
-        temps.innerText = resultatAPI.current.weather[0].description
-        temperature.innerText = `${Math.trunc(resultatAPI.current.temp)}°`
-        localisation.innerText = resultatAPI.timezone
+
+        temps.innerText = resultatAPI.list[0].weather[0].description
+        temperature.innerText = `${Math.trunc(resultatAPI.list[0].main.temp - 273)}°`
+        localisation.innerText = resultatAPI.city.name
 
         let heureActuelle = new Date().getHours()
 
@@ -61,7 +74,8 @@ function AppelAPI(long, lat) {
         }
 
         for(let j=0; j<tempPourH.length; j++) {
-            tempPourH[j].innerText= `${Math.trunc(resultatAPI.hourly[j*3]).temp}°`
+            // tempPourH[j].innerText= `${Math.trunc(resultatAPI.hourly[j*3]).temp}°`
+            tempPourH[j].innerText= `${Math.trunc(resultatAPI.list[j].main.temp - 273)}°`
         }
 
         for(let k=0; k<tabJourEnOrdre.length; k++) {
